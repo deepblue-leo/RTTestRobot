@@ -1,0 +1,9 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {},
+	"python.autoComplete.extraPaths": ["E:\\Work\\MyProject\\PyProject\\rt_uiauto\\env_desktop\\Lib\\site-packages",]
+}
