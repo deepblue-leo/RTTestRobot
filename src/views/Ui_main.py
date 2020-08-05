@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'e:\FHL\MyProject\PyProject\rt_uiauto\src\views\main.ui'
+# Form implementation generated from reading ui file 'e:\Work\MyProject\PyProject\RTTestRobot\src\views\main.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #

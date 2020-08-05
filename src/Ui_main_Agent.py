@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Feng Heliang
 # @Date:   2020-07-17 10:51:15
-# @Last Modified by:   Heliang
-# @Last Modified time: 2020-08-01 13:37:08
+# @Last Modified by:   Feng Heliang
+# @Last Modified time: 2020-08-05 11:56:14
 import PyQt5.QtWidgets as QtWidgets
 import PyQt5.QtCore as QtCore
 from PyQt5.QtWidgets import (QMessageBox, QTableWidgetItem, QFileDialog,
@@ -15,6 +15,7 @@ from logger import MyLogger as mlog
 import time
 import uiautomation as auto
 import json
+from playbook import PlaybookManager
 
 
 class Ui_main_Agent(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -65,8 +66,8 @@ class Ui_main_Agent(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
         self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
 
-        # 设置verticalLayout3的控件为顶对齐
-        self.verticalLayout3.setAlignment(QtCore.Qt.AlignTop)        
+        # 设置scriptVerticalLayout的控件为顶对齐
+        self.scriptVerticalLayout.setAlignment(QtCore.Qt.AlignTop)
 
         # 挂载slot
         self.select_button.clicked.connect(self._slot_btn_select)
@@ -163,7 +164,8 @@ class Ui_main_Agent(QtWidgets.QMainWindow, Ui_MainWindow):
         item_info_json = json.dumps(item_info_dict, sort_keys=False, indent=1)
         # 附加到TextEdit
         # self.jsonTextEdit.append(item_info_json)
-        self.verticalLayout3.addWidget(self._create_textEdit(item_info_json))
+        self.scriptVerticalLayout.addWidget(
+            self._create_textEdit(item_info_json))
 
     def _slot_btn_clear(self):
         """清空jsonTextEdit"""
@@ -176,7 +178,10 @@ class Ui_main_Agent(QtWidgets.QMainWindow, Ui_MainWindow):
         """保存当前脚本
         """
         if self.scriptVerticalLayout.count() > 0:
-            pass
+            pbm = PlaybookManager()
+            for index in range(self.scriptVerticalLayout.count()):
+                item = (QTextEdit)self.scriptVerticalLayout.children[index]
+                pbm.add(item.toPlainText(item.toPlainText().strip()))
 
     def _get_control_infos(self, seconds=3):
         """获取焦点所在应用的所有窗体控件，并便利输出控件信息

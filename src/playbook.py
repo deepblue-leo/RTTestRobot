@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Heliang
 # @Date:   2020-08-01 14:04:19
-# @Last Modified by:   Heliang
-# @Last Modified time: 2020-08-01 14:58:05
+# @Last Modified by:   Feng Heliang
+# @Last Modified time: 2020-08-05 11:07:44
 import json
 from logger import MyLogger as mlog
 import os, sys
@@ -40,7 +40,8 @@ class PlaybookManager:
         else:
             try:
                 with open(playbook_name, "w+") as fp:
-                    fp.writelines(json.dumps(self._playbook_content_dict, indent=1))
+                    fp.writelines(
+                        json.dumps(self._playbook_content_dict, indent=1))
                     mlog.instance().logger.info(
                         f"{self.__class__.__name__} {sys._getframe().f_code.co_name}: save into {playbook_name} successfully"
                     )
@@ -107,8 +108,8 @@ class PlaybookManager:
             return 1
 
     def get_playbook_content(self):
-        """获取playbook内容
-        
+        """获取playbook内容    
+            
         Returns:
             dict: 装载playbook内容的字典
         """
